@@ -1,217 +1,82 @@
-<?php //$Author: 'TecnicoaCR'; ?>
+<!-- Author: TecnicoaCR -->
+<?php
+// $Author: 'TecnicoaCR';
+	session_start();
+
+	require 'assets/funcs/conn_db_mycctv.php';
+	require 'assets/funcs/funcs.php';
+
+	$errors = array();
+
+	if (!empty($_POST)) {
+		// code...
+		$usuario = $_POST['usuario'];
+		$password = $_POST['password'];
+
+		if(isNullLogin($usuario, $password)){
+			$errors[] = 'Debe de llenar todos los campos';
+		}
+		$errors[] = login($usuario, $password);
+	}
+
+ ?>
 <!-- Author: TecnicoaCR -->
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <?php include 'views/Head.php'; ?>
+        <?php include 'assets/partials/head.php'; ?>
         <title>Inicio - TecnicoaCR </title>
     </head>
     <body>
-        
-        <!-- ---------- NAVBAR ---------- -->
-        <?php include 'views/nav.php'?>
         <!-- ---------- HEADER ---------- -->
-        <?php include 'views/Header.php'?>
-               
-        <section class="bg-primary" id="about">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 mx-auto text-center">
-        <h2 class="section-heading text-white">¡Tenemos lo que necesitas!</h2>
-        <hr class="light my-4">
-        <p class="text-faded mb-4">TecnicoaCR Team se especializa en computacion, redes, ofimatica, desarrollo web, capacitaciones y mucho más!</p>
-        <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">¡Inicie con nosotros!</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <hr>
-
-  <section id="services">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-3 col-md-6 text-center">
-          <div class="service-box mt-5 mx-auto">
-            <i class="fas fa-4x fa-gem text-primary mb-3 sr-icon-1"></i>
-            <h3 class="mb-3">Comodos Precios</h3>
-            <p class="text-muted mb-0">Tenemos los precio más accesibles del mercado.</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 text-center">
-          <div class="service-box mt-5 mx-auto">
-            <i class="fas fa-4x fa-paper-plane text-primary mb-3 sr-icon-2"></i>
-            <h3 class="mb-3">Listos para comenzar</h3>
-            <p class="text-muted mb-0">Iniciaremos el proyecto inmediatamente una vez nos autorices!</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 text-center">
-          <div class="service-box mt-5 mx-auto">
-            <i class="fas fa-4x fa-code text-primary mb-3 sr-icon-3"></i>
-            <h3 class="mb-3">Capacitaciones</h3>
-            <p class="text-muted mb-0">Nuestras charlas interactivas ofrecen una enseñanza inclusiva!</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 text-center">
-          <div class="service-box mt-5 mx-auto">
-            <i class="fas fa-4x fa-heart text-primary mb-3 sr-icon-4"></i>
-            <h3 class="mb-3">Lo hacemos con el corazón</h3>
-            <p class="text-muted mb-0">Porque támbien sómos Ticos y tambien somos Pura Vida!</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="p-0" id="portfolio">
-    <div class="container-fluid p-0">
-      <div class="row no-gutters popup-gallery">
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
-            <img class="img-fluid" src="img/portfolio/thumbnails/1.jpg" alt="">
-            <div class="portfolio-box-caption">
-              <div class="portfolio-box-caption-content">
-                <div class="project-category text-faded">
-                  Category
-                </div>
-                <div class="project-name">
-                  Project Name
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="img/portfolio/fullsize/2.jpg">
-            <img class="img-fluid" src="img/portfolio/thumbnails/2.jpg" alt="">
-            <div class="portfolio-box-caption">
-              <div class="portfolio-box-caption-content">
-                <div class="project-category text-faded">
-                  Category
-                </div>
-                <div class="project-name">
-                  Project Name
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="img/portfolio/fullsize/3.jpg">
-            <img class="img-fluid" src="img/portfolio/thumbnails/3.jpg" alt="">
-            <div class="portfolio-box-caption">
-              <div class="portfolio-box-caption-content">
-                <div class="project-category text-faded">
-                  Category
-                </div>
-                <div class="project-name">
-                  Project Name
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="img/portfolio/fullsize/4.jpg">
-            <img class="img-fluid" src="img/portfolio/thumbnails/4.jpg" alt="">
-            <div class="portfolio-box-caption">
-              <div class="portfolio-box-caption-content">
-                <div class="project-category text-faded">
-                  Category
-                </div>
-                <div class="project-name">
-                  Project Name
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="img/portfolio/fullsize/5.jpg">
-            <img class="img-fluid" src="img/portfolio/thumbnails/5.jpg" alt="">
-            <div class="portfolio-box-caption">
-              <div class="portfolio-box-caption-content">
-                <div class="project-category text-faded">
-                  Category
-                </div>
-                <div class="project-name">
-                  Project Name
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="img/portfolio/fullsize/6.jpg">
-            <img class="img-fluid" src="img/portfolio/thumbnails/6.jpg" alt="">
-            <div class="portfolio-box-caption">
-              <div class="portfolio-box-caption-content">
-                <div class="project-category text-faded">
-                  Category
-                </div>
-                <div class="project-name">
-                  Project Name
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-dark text-white">
-      <h2 class="mb-4">Nuestras aplicaciones!</h2>
-            
-      <div class="container text-center col">
-          <h2 class="mb-2">TecOS_MyCCTV!</h2>
-          <a class="btn btn-light btn-xl sr-button" href="app/MyCCTV/login.php">Ingrese ahora!</a>
-      </div> 
-      
-      <div class="container text-center col">
-          <h2 class="mb-2">TecOS_INV!</h2>
-          <a class="btn btn-light btn-xl sr-button" href="apps/MyCCTV/login.php">Ingrese ahora!</a>
-      </div>      
-  </section>
-
-  <section id="contact">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto text-center">
-          <h2 class="section-heading">¡Mantengámonos en contacto!</h2>
-          <hr class="my-4">
-          <p class="mb-5">¿Listo para comenzar tu próximo proyecto con nosotros? ¡Eso es genial! ¡Llámenos o envíenos un correo electrónico y nos pondremos en contacto con usted lo antes posible!</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 ml-auto text-center">
-          <i class="fas fa-phone fa-3x mb-3 sr-contact-1"></i>
-          <p>+506 8739 7420</p>
-        </div>
-        <div class="col-lg-4 mr-auto text-center">
-          <i class="fas fa-envelope fa-3x mb-3 sr-contact-2"></i>
-          <p>
-            <a href="mailto:produccion.tecnicoacr@gmail.com">produccion.tecnicoaccr@gmail.com</a>
-          </p>
-        </div>
-
+        <?php include 'assets/partials/header.php'?>
+        
         <div class="container">
-          <div class="text-center center-block">
-            <a href="https://www.facebook.com/bootsnipp"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
-	          <a href="https://twitter.com/bootsnipp"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
-	          <a href="https://plus.google.com/+Bootsnipp-page"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
-	          <a href="mailto:bootsnipp@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
-          </div>
-          <hr>
-        </div>
+			<div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+				<div class="panel panel-info" >
+					<div class="panel-heading">
+						<div class="panel-title">Iniciar Sesi&oacute;n</div>
+						<div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="tools/recoverypass.php">¿Se te olvid&oacute; tu contraseña?</a></div>
+					</div>
 
-        <br />
-      </div>
-    </div>
-  </section>
-    
+					<div style="padding-top:30px" class="panel-body" >
+
+						<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+						<form id="loginform" class="form-horizontal" role="form" action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" autocomplete="off">
+
+							<div style="margin-bottom: 25px" class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								<input id="usuario" type="text" class="form-control" name="usuario" value="" placeholder="usuario o email" required>
+							</div>
+
+							<div style="margin-bottom: 25px" class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+								<input id="password" type="password" class="form-control" name="password" placeholder="password" required>
+							</div>
+
+							<div style="margin-top:10px" class="form-group">
+								<div class="col-sm-12 controls">
+									<button id="btn-login" type="submit" class="btn btn-success">Iniciar Sesi&oacute;n</a>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-12 control">
+									<div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+										No tiene una cuenta! <a href="tools/registro.php">Registrate aquí</a>
+									</div>
+								</div>
+							</div>
+						</form>
+						<?php echo resultBlock($errors) ?>
+					</div>
+				</div>
+			</div>
+		</div>
+          
 	<!-- -------- FOOTER -------- -->
-	<?php include_once 'views/Footer.php'?>
+	<?php include 'assets/partials/footer.php'?>
     </body>
 </html>
 <!-- Author: TecnicoaCR -->
